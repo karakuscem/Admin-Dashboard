@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+
+:root {
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    --gh-avatar: url("https://github.com/karakuscem.png");
+    --gh-avatar2: url("https://github.com/alex.png");
+    --gh-avatar3: url("https://github.com/kendall.png");
+    --gh-avatar4: url("https://github.com/morgan.png");
+    --bg-color: rgb(221, 213, 213);
+    --nav-bg-1: #f8f8f8;
+    --nav-color-1: #c9c9c9;
+    --nav-color-2: #62daff6e;
+    --drawer-color: rgb(9, 135, 173);
+    --text-color1: white;
+    --text-color2: black;
+    --content-color1: #084c61;
+    --content-color2: #1792b8;
+    --drawer-width: clamp(210px, 22vw, 325px);
+    --transition-notDrawer: margin-left 0.4s ease-in;
+    --transition-drawer: width 0.4s ease-in;
+}
+
+body {
+    width: 100vw;
+    height: 90vh;
+    display: grid;
+    grid-template-areas: 
+    "drawer nav nav nav"
+    "drawer content content content";
+    grid-template-rows: 0.8fr 4fr;
+    grid-template-columns: 5rem 1fr 1fr 1fr;
+    background-color: var(--bg-color);
+}
+
+.drawer {
+    grid-area: drawer;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--drawer-color);
+    overflow: hidden;
+    width: 5rem;
+    transition: var(--transition-drawer);
+}
+
+.drawer:hover {
+    width: var(--drawer-width);
+}
+
+.drawer:hover > .menuItem > h1 {
+    display: inline;
+}
+
+.drawer > div:not(:first-child) > * {
+    padding: 1vw 0.1vw 0.1vw 0vw;
+    font-size: calc(20px + 0.2vw);
+    padding-left: 20px;
+}
+
+.drawer > div:not(:first-child) > img {
+    width: calc(20px + 0.5vw);
+    height: calc(20px + 0.5vw);
+}
+
+.drawer > div:nth-child(8) {
+    margin-top: 40px;
+}
+
+.dashboard {
+    font-size: clamp(12px, calc(25px + 0.9vw), 50px);
+}
+
+.drawer:hover ~ .navbar,
+.drawer:hover ~ .content {
+    margin-left: calc(var(--drawer-width) - 5rem);
+}
+
+.dashboard img {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(40px + 0.7vw);
+    height: calc(40px + 0.7vw);
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.menuItem {
+    display: flex;
+    color: var(--text-color1);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menuItem > h1 {
+    display: none;
+    margin-left: 5%;
+}
+
+.menuItem > * {
+    cursor: pointer;
+}
+
+.menuItem > img:not(:first-child) {
+    padding: 0.5rem;
+}
+
+/* Navbar */
+.navbar {
+    grid-area: nav;
+    position: sticky;
+    top: 0;
+    transition: var(--transition-notDrawer);
+    background-color: var(--nav-bg-1);
+    display: flex;
+    flex-direction: column;
+}
+
+.topNav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchBar {
+    display: flex;
+    padding: 1rem;
+    gap: 20px;
+}
+
+.rightProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.topNav > .rightProfile > .gh-avatar {
+    background: var(--gh-avatar) center center / cover no-repeat;
+    border-radius: 50%;
+    margin: 0 .5rem 0 1rem;
+    height: 40px;
+    width: 40px;
+}
+
+
+.searchField > input {
+    width: 30vw;
+    border: none;
+    height: calc(20px + 0.5vh);
+    border-radius: 10px;
+    background-color: var(--nav-color-1);
+}
+
+.searchField > input:focus {
+    outline-color: var(--content-color1);
+}
+
+.bottomNav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottomLeft {
+    display: grid;
+    grid-template-areas: 
+    "profile greeting"
+    "profile username";
+    padding: 1.5rem;
+    gap: 10px;
+}
+
+.greeting {
+    grid-area: greeting;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.username {
+    grid-area: username;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bottomNav > .bottomLeft > .gh-avatar {
+    grid-area: profile;
+    background: var(--gh-avatar) center center / cover no-repeat;
+    border-radius: 50%;
+    margin: 0 .5rem 0 1rem;
+    height: 60px;
+    width: 60px;
+}
+
+.bottomRight {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 1.5rem;
+}
+
+.btn {
+    cursor: pointer;
+    height: 50px;
+    width: 80px;
+    background-color: var(--drawer-color);
+    border: 1px solid var(--drawer-color);
+    border-radius: 8px;
+    align-items: center;
+    font-size: 1rem;
+}
+
+
+/* Content */
+.content {
+    display: grid;
+    grid-area: content;
+    grid-template-areas: 
+    "heading heading heading announcement"
+    "main main main announcement"
+    "main main main trending";
+    transition: var(--transition-notDrawer);
+}
+
+.contentHeading {
+    grid-area: heading;
+    margin: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cards {
+    grid-area: main;
+    margin: 2rem 2rem 2rem;
+    gap: calc(30px + 0.2vw);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.card {
+    background-color: var(--content-color2);
+    border-radius: 10px;
+    border-left: 10px solid orange;
+}
+
+.card > h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.card > p {
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card  .cardIcons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+    align-self: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+.announcements {
+    grid-area: announcement;
+    margin: 2rem 2rem 2rem;
+    background-color: var(--content-color1);
+    color: var(--text-color1);
+    border-radius: 10px;
+}
+
+.announcement {
+    width: 25ch;
+    padding: 1rem 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.announcement h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.announcement p {
+    font-size: 0.8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.announcement + .announcement {
+    border-top: 1px white solid;
+}
+
+.trending {
+    grid-area: trending;
+    margin: 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #24bbf7;
+    border-radius: 10px;
+}
+
+.trend {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.trend h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.trend + .trend {
+    margin-top: 1.5rem;
+}
+
+.trend .account {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+.trend-1 .gh-avatar2 {
+    background: var(--gh-avatar2) center center / cover no-repeat;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.trend-2 .gh-avatar {
+    background: var(--gh-avatar) center center / cover no-repeat;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.trend-3 .gh-avatar3 {
+    background: var(--gh-avatar3) center center / cover no-repeat;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.trend-4 .gh-avatar4 {
+    background: var(--gh-avatar4) center center / cover no-repeat;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
